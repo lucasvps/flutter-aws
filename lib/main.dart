@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'services/auth_service.dart';
+import 'ui/screens/camera_flow.dart';
 import 'ui/screens/login_page.dart';
 import 'ui/screens/signup_page.dart';
 import 'ui/screens/verification_page.dart';
@@ -51,7 +52,10 @@ class _MyAppState extends State<MyApp> {
                         child: SignUpPage(
                       shouldShowLogin: _authService.showLogin,
                       didProvideCredentials: _authService.signUpWithCredentials,
-                    ))
+                    )),
+                  if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
+                    MaterialPage(
+                        child: CameraFlow(shouldLogOut: _authService.logOut))
                 ],
                 onPopPage: (route, result) => route.didPop(result),
               );
