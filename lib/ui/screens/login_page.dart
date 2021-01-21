@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_aws/services/analytics_events.dart';
+import 'package:flutter_aws/services/analytics_service.dart';
 import 'package:flutter_aws/services/auth_credentials.dart';
 
 class LoginPage extends StatefulWidget {
@@ -72,5 +74,7 @@ class _LoginPageState extends State<LoginPage> {
     final credentials =
         LoginCredentials(username: username, password: password);
     widget.didProvideCredentials(credentials);
+
+    AnalyticsService.log(LoginEvent());
   }
 }
