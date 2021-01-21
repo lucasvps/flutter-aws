@@ -50,7 +50,6 @@ class _CameraPageState extends State<CameraPage> {
     );
   }
 
-  // 6
   void _takePicture() async {
     try {
       await _initializeControllerFuture;
@@ -59,11 +58,9 @@ class _CameraPageState extends State<CameraPage> {
       final filePath = '${DateTime.now().millisecondsSinceEpoch}.png';
       final path = join(tmpDirectory.path, filePath);
 
-      await _controller.takePicture();
+      await _controller.takePicture(path);
 
       widget.didProvideImagePath(path);
-      AnalyticsService.log(TakePictureEvent(
-          cameraDirection: widget.camera.lensDirection.toString()));
     } catch (e) {
       print(e);
     }
